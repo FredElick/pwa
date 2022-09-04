@@ -34,7 +34,6 @@ function uploadTransaction() {
 
     getAll.onsuccess = function() {
         if(getAll.result.length > 0) {
-            console.log('get all not empty');
             fetch('/api/transaction', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result),
@@ -62,6 +61,5 @@ function uploadTransaction() {
 }
 
 window.addEventListener('online',() =>{
-    console.log('online');
     uploadTransaction();
 } );
