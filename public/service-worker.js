@@ -6,23 +6,20 @@ const FILES_TO_CACHE = [
     "./index.html",
     "./css/styles.css",
     "./js/index.js",
-    "./js/idb.js"
+    "./js/idb.js",
+    "./manifest.json"
 ];
 
-self.addEventListener('fetch', function (e) {
-    console.log('fetch request : ' + e.request.url)
-    e.respondWith(
-      caches.match(e.request).then(function (response) {
-        if (response) { 
-          console.log('responding with cache : ' + e.request.url)
-          return response;
-        } else {
-          console.log('file is not cached, fetching : ' + e.request.url)
-          return fetch(e.response);
-        }
-      })
-    );
-  });
+self.addEventListener("fetch", function (event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      if (response) {
+        return response;
+      }
+      return fetch(event.request);
+    })
+  );
+});
 
 
 self.addEventListener('install', function (e) {
